@@ -14,7 +14,18 @@ body {
   align-content: center;
 
   font-family: 'Open Sans', sans-serif;
-  background: linear-gradient(180deg, rgb(187 163 198), rgb(129 62 173));
+  /*background: linear-gradient(180deg, rgb(187 163 198), rgb(129 62 173));*/
+  background-color: rgb(149 91 189);
+}
+
+.bodyArea {
+  width: 100vw;
+  height: 100vh;
+  flex-direction: row;
+  display: inline-flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .playerX {
@@ -23,6 +34,10 @@ body {
 
 .playerO {
   cursor: url("../assets/O.png"), auto;
+}
+
+.cursorModal {
+  cursor: auto;
 }
 
 .ticTacToe {
@@ -34,7 +49,7 @@ body {
   height: 400px;
   padding: 5px;
   border: 2px solid #e4e4e4;
-  margin-left: -30%;
+  /*margin-left: -30%;*/
 
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
@@ -47,15 +62,28 @@ body {
   justify-content: space-between;
 }
 
+.squareX {
+  color: #f2d736;
+}
+
+.squareO {
+  color: #ff5edb;
+}
+
 .square {
   display: block;
   width: 125px;
   height: 125px;
   border: 1px solid #e4e4e4;
 
-  color: #e4e4e4;
+  /*color: #e4e4e4;*/
   font-size: 5em;
   font-weight: 100;
   text-align: center;
-  padding: 20px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
 }

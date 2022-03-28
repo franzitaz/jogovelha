@@ -17,8 +17,20 @@ const Square = ({ col, row, handleChange, valueLine }: ISquare) => {
 
     }
 
+    const changeColorPlayer = () => {
+        let classStyle = `square\n`;
+
+        if (valueLine === 'X') {
+            classStyle = classStyle + 'squareX';
+        } else {
+            classStyle = classStyle + 'squareO';
+        }
+
+        return classStyle;
+    };
+
     return (
-        <span onClick={handleClick} className="square">{valueLine}</span>
+        <span onClick={handleClick} className={changeColorPlayer()}>{valueLine}</span>
     )
 }
 

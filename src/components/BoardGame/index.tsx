@@ -113,9 +113,9 @@ const BoardGame = () => {
         ]);
         setPlayer('');
     }
-      
+
     const changeCursorPlayer = () => {
-        let classStyle=`ticTacToe\n`;
+        let classStyle = `bodyArea\n`;
 
         if (player === 'X') {
             classStyle = classStyle + 'playerX';
@@ -124,15 +124,18 @@ const BoardGame = () => {
         }
 
         return classStyle;
-      };
+    };
 
     return (
         <div className={changeCursorPlayer()}>
-            <Row valueLine={gameState[0]} row={'0'} handleChange={handleChange} />
-            <Row valueLine={gameState[1]} row={'1'} handleChange={handleChange} />
-            <Row valueLine={gameState[2]} row={'2'} handleChange={handleChange} />
-            <Modal modalTitle={modalTitle} modalText={modalText} player={player} show={showModal} dismissModal={dismissModal} />
+            <div className='ticTacToe'>
+                <Row valueLine={gameState[0]} row={'0'} handleChange={handleChange} />
+                <Row valueLine={gameState[1]} row={'1'} handleChange={handleChange} />
+                <Row valueLine={gameState[2]} row={'2'} handleChange={handleChange} />
+                <Modal modalTitle={modalTitle} modalText={modalText} player={player} show={showModal} dismissModal={dismissModal} />
+            </div>
         </div>
+
     )
 }
 
