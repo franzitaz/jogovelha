@@ -3,7 +3,7 @@ import Square from "../Square";
 interface IRow {
     row: string
     handleChange: any
-    valueLine: any
+    valueLine: string[]
 }
 
 const Row = ({row, handleChange, valueLine}:IRow) => {
