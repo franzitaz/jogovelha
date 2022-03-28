@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Row from '../Row';
 import Modal from "../Modal";
+import LogGame from "../LogGame";
 
 const BoardGame = () => {
 
@@ -14,12 +15,17 @@ const BoardGame = () => {
     const [showModal, setShowModal] = useState(false);
     const [modalText, setModalText] = useState('');
     const [modalTitle, setModalTitle] = useState('');
+    const [log, setLog] = useState<string[]>([]);
 
     useEffect(() => {
 
         if (checkWon()) {
             setModalTitle(`Jogador "${player}" ganhou!`)
             setModalText('Parabéns!');
+            setShowModal(true);
+        } else if (checkDraw()) {
+            setModalTitle('Empatou');
+            setModalText('Vocês empataram, começe um novo jogo!');
             setShowModal(true);
         } else {
             if (player === 'X') {
@@ -37,6 +43,8 @@ const BoardGame = () => {
 
         currentGame[row][col] = player;
 
+        setLog([...log, `Player ${player}: clicou na linha ${Number(row)+1}, coluna ${Number(col)+1}`]);
+        
         setGameState([...currentGame]);
 
     }
@@ -73,11 +81,6 @@ const BoardGame = () => {
             return gameState[0][2];
         }
 
-        if (checkDraw()) {
-            setModalTitle('Empatou');
-            setModalText('Vocês empataram, começe um novo jogo!');
-            setShowModal(true);
-        }
         return false;
     }
 
@@ -105,6 +108,10 @@ const BoardGame = () => {
         resetGame();
     }
 
+    const cleanLog = () => {
+        setLog([]);
+    }
+
     const resetGame = () => {
         setGameState([
             ['', '', ''],
@@ -112,6 +119,8 @@ const BoardGame = () => {
             ['', '', '']
         ]);
         setPlayer('');
+
+        cleanLog();
     }
 
     const changeCursorPlayer = () => {
@@ -132,8 +141,11 @@ const BoardGame = () => {
                 <Row valueLine={gameState[0]} row={'0'} handleChange={handleChange} />
                 <Row valueLine={gameState[1]} row={'1'} handleChange={handleChange} />
                 <Row valueLine={gameState[2]} row={'2'} handleChange={handleChange} />
-                <Modal modalTitle={modalTitle} modalText={modalText} player={player} show={showModal} dismissModal={dismissModal} />
             </div>
+            
+            <LogGame logs={log} />
+            
+            <Modal modalTitle={modalTitle} modalText={modalText} player={player} show={showModal} dismissModal={dismissModal} />
         </div>
 
     )

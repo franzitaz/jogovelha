@@ -2,7 +2,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -13,7 +14,7 @@ body {
   flex-wrap: wrap;
   align-content: center;
 
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   /*background: linear-gradient(180deg, rgb(187 163 198), rgb(129 62 173));*/
   background-color: rgb(149 91 189);
 }
@@ -86,4 +87,19 @@ body {
   align-items: center;
   justify-content: center;
   align-content: center;
+}
+
+.logGame {
+  font-size: 16px;
+  font-family: arial;
+}
+
+.containerLog {
+  height: 400px;
+  width: 327px;
+  margin-left: 50px;
+  padding: 10px;
+  border-width: 2px;
+  color: white;
+  font-weight: 600;
 }
