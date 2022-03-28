@@ -111,13 +111,23 @@ const BoardGame = () => {
             ['', '', ''],
             ['', '', '']
         ]);
-        setPlayer('')
+        setPlayer('');
     }
+      
+    const changeCursorPlayer = () => {
+        let classStyle=`ticTacToe\n`;
 
+        if (player === 'X') {
+            classStyle = classStyle + 'playerX';
+        } else {
+            classStyle = classStyle + 'playerO';
+        }
 
+        return classStyle;
+      };
 
     return (
-        <div className="ticTacToe">
+        <div className={changeCursorPlayer()}>
             <Row valueLine={gameState[0]} row={'0'} handleChange={handleChange} />
             <Row valueLine={gameState[1]} row={'1'} handleChange={handleChange} />
             <Row valueLine={gameState[2]} row={'2'} handleChange={handleChange} />
