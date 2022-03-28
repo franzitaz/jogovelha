@@ -20,13 +20,25 @@ const BoardGame = () => {
     const [modalStartGame, setModalStartGame] = useState(true);
     const [namePlayerX, setNamePlayerX] = useState('');
     const [namePlayerO, setNamePlayerO] = useState('');
+    const [scorePlayerX, setScorePlayerX] = useState(0);
+    const [scorePlayerO, setScorePlayerO] = useState(0);
 
     useEffect(() => {
 
         if (checkWon()) {
-            setModalTitle(`Jogador "${player}" ganhou!`);
 
-            setLog([...log, `Jogador "${player}" ganhou!`]);
+
+            if (player === 'X' ) {
+                setScorePlayerX(scorePlayerX + 1);
+                setModalTitle(`Player ${namePlayerX} ganhou!`);
+
+                setLog([...log, `Player "${namePlayerX}" ganhou!`]);
+            } else {
+                setScorePlayerO(scorePlayerO + 1);
+                setModalTitle(`Player ${namePlayerO} ganhou!`);
+
+                setLog([...log, `Player ${namePlayerO} ganhou!`]);
+            }
 
             setModalText('Parabéns!');
             setShowModal(true);
@@ -54,7 +66,7 @@ const BoardGame = () => {
         currentGame[row][col] = player;
 
         setLog([...log, `${player === 'X' ? namePlayerX : namePlayerO} que é ${player === 'X' ? 'X' : 'O'}: clicou na linha ${Number(row) + 1}, coluna ${Number(col) + 1}`]);
-        console.log(namePlayerX);
+        
         setGameState([...currentGame]);
 
     }
@@ -153,8 +165,7 @@ const BoardGame = () => {
         <>
             <StartGame show={modalStartGame}
             dismissModalStartGame={dismissModalStartGame}
-            setPlayerX={setNamePlayerX} setPlayerO={setNamePlayerO}
-            namePlayerX={namePlayerX} namePlayerO={namePlayerO}/>
+            setPlayerX={setNamePlayerX} setPlayerO={setNamePlayerO}/>
 
             <div className={changeCursorPlayer()}>
                 <div className='ticTacToe'>
@@ -163,7 +174,7 @@ const BoardGame = () => {
                     <Row valueLine={gameState[2]} row={'2'} handleChange={handleChange} />
                 </div>
 
-                <LogGame logs={log} />
+                <LogGame namePlayerX={namePlayerX} scorePlayerX={scorePlayerX} namePlayerO={namePlayerO} scorePlayerO={scorePlayerO} logs={log} />
 
                 <Modal modalTitle={modalTitle} modalText={modalText} show={showModal} dismissModal={dismissModal} />
             </div>

@@ -1,13 +1,13 @@
+import { Dispatch, SetStateAction } from "react"
+
 interface IModal {
-    show: any
-    dismissModalStartGame: any
-    setPlayerX:any 
-    setPlayerO:any 
-    namePlayerX:string  
-    namePlayerO: string
+    show: boolean
+    dismissModalStartGame: Dispatch<SetStateAction<void>>
+    setPlayerX: Dispatch<SetStateAction<string>>
+    setPlayerO: Dispatch<SetStateAction<string>>
 }
 
-const StartGame = ({show, dismissModalStartGame, setPlayerX, setPlayerO, namePlayerX, namePlayerO}:IModal) => {
+const StartGame = ({show, dismissModalStartGame, setPlayerX, setPlayerO}:IModal) => {
 
     const handleClick = () => dismissModalStartGame();
 

@@ -95,11 +95,25 @@ body {
 }
 
 .containerLog {
-  height: 400px;
+  height: 350px;
   width: 378px;
   margin-left: 50px;
   padding: 10px;
   border-width: 2px;
   color: white;
   font-weight: 600;
+}
+
+.info {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-weight: 600;
+
+}
+
+.score {
+  height: 50px;
+  margin-left: 50px;
 }
