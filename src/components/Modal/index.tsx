@@ -1,12 +1,11 @@
 interface IModal {
     show: any
     dismissModal: any
-    player: string
     modalText: string
     modalTitle:string
 }
 
-const Modal = ({ modalTitle, modalText, show, dismissModal, player}:IModal) => {
+const Modal = ({ modalTitle, modalText, show, dismissModal}:IModal) => {
 
     const handleClick = () => dismissModal();
 

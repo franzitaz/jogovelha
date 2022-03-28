@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Row from '../Row';
 import Modal from "../Modal";
 import LogGame from "../LogGame";
+import StartGame from "../StartGame";
 
 const BoardGame = () => {
 
@@ -16,16 +17,25 @@ const BoardGame = () => {
     const [modalText, setModalText] = useState('');
     const [modalTitle, setModalTitle] = useState('');
     const [log, setLog] = useState<string[]>([]);
+    const [modalStartGame, setModalStartGame] = useState(true);
+    const [namePlayerX, setNamePlayerX] = useState('');
+    const [namePlayerO, setNamePlayerO] = useState('');
 
     useEffect(() => {
 
         if (checkWon()) {
-            setModalTitle(`Jogador "${player}" ganhou!`)
+            setModalTitle(`Jogador "${player}" ganhou!`);
+
+            setLog([...log, `Jogador "${player}" ganhou!`]);
+
             setModalText('Parabéns!');
             setShowModal(true);
         } else if (checkDraw()) {
             setModalTitle('Empatou');
             setModalText('Vocês empataram, começe um novo jogo!');
+
+            setLog([...log, `Vocês empataram, começe um novo jogo!`]);
+
             setShowModal(true);
         } else {
             if (player === 'X') {
@@ -43,8 +53,8 @@ const BoardGame = () => {
 
         currentGame[row][col] = player;
 
-        setLog([...log, `Player ${player}: clicou na linha ${Number(row)+1}, coluna ${Number(col)+1}`]);
-        
+        setLog([...log, `${player === 'X' ? namePlayerX : namePlayerO} que é ${player === 'X' ? 'X' : 'O'}: clicou na linha ${Number(row) + 1}, coluna ${Number(col) + 1}`]);
+        console.log(namePlayerX);
         setGameState([...currentGame]);
 
     }
@@ -108,6 +118,10 @@ const BoardGame = () => {
         resetGame();
     }
 
+    const dismissModalStartGame = () => {
+        setModalStartGame(false);
+    }
+
     const cleanLog = () => {
         setLog([]);
     }
@@ -136,18 +150,24 @@ const BoardGame = () => {
     };
 
     return (
-        <div className={changeCursorPlayer()}>
-            <div className='ticTacToe'>
-                <Row valueLine={gameState[0]} row={'0'} handleChange={handleChange} />
-                <Row valueLine={gameState[1]} row={'1'} handleChange={handleChange} />
-                <Row valueLine={gameState[2]} row={'2'} handleChange={handleChange} />
-            </div>
-            
-            <LogGame logs={log} />
-            
-            <Modal modalTitle={modalTitle} modalText={modalText} player={player} show={showModal} dismissModal={dismissModal} />
-        </div>
+        <>
+            <StartGame show={modalStartGame}
+            dismissModalStartGame={dismissModalStartGame}
+            setPlayerX={setNamePlayerX} setPlayerO={setNamePlayerO}
+            namePlayerX={namePlayerX} namePlayerO={namePlayerO}/>
 
+            <div className={changeCursorPlayer()}>
+                <div className='ticTacToe'>
+                    <Row valueLine={gameState[0]} row={'0'} handleChange={handleChange} />
+                    <Row valueLine={gameState[1]} row={'1'} handleChange={handleChange} />
+                    <Row valueLine={gameState[2]} row={'2'} handleChange={handleChange} />
+                </div>
+
+                <LogGame logs={log} />
+
+                <Modal modalTitle={modalTitle} modalText={modalText} show={showModal} dismissModal={dismissModal} />
+            </div>
+        </>
     )
 }
 
