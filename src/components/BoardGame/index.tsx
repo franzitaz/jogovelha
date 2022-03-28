@@ -29,7 +29,7 @@ const BoardGame = () => {
             }
         }
 
-        
+
     }, [gameState])
 
     const handleChange = (row: number, col: number) => {
@@ -38,53 +38,57 @@ const BoardGame = () => {
         currentGame[row][col] = player;
 
         setGameState([...currentGame]);
-        
+
+    }
+
+    const checkSquareValue = (square: string, square2: string) => {
+        if (square.length === 0 || square2.length === 0) {
+            return false;
+        } else {
+            if (square === square2) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     const checkWon = () => {
         for (let i = 0; i < gameState.length; i++) {
-            if (
-              gameState[i][0] === gameState[i][1] &&
-              gameState[i][1] === gameState[i][2]
-            ) {
-              return gameState[i][0];
+
+            if (checkSquareValue(gameState[i][0], gameState[i][1]) != false && checkSquareValue(gameState[i][1], gameState[i][2]) != false) {
+                return true;
             }
-          }
-          for (let i = 0; i < gameState.length; i++) {
-            if (
-              gameState[0][i] === gameState[1][i] &&
-              gameState[1][i] === gameState[2][i]
-            ) {
-              return gameState[0][i];
+        }
+        for (let i = 0; i < gameState.length; i++) {
+            if (checkSquareValue(gameState[0][i], gameState[1][i]) != false && checkSquareValue(gameState[1][i], gameState[2][i]) != false) {
+                return true;
+
             }
-          }
-          if (
-            gameState[0][0] === gameState[1][1] &&
-            gameState[1][1] === gameState[2][2]
-          ) {
+        }
+        if (gameState[0][0] === gameState[1][1] && gameState[1][1] === gameState[2][2]) {
             return gameState[0][0];
-          }
-          if (
-            gameState[0][2] === gameState[1][1] &&
-            gameState[1][1] === gameState[2][0]
-          ) {
+        }
+        if (gameState[0][2] === gameState[1][1] && gameState[1][1] === gameState[2][0]) {
             return gameState[0][2];
-          }
-          if (checkDraw()) {
+        }
+
+        if (checkDraw()) {
             setModalTitle('Empatou');
             setModalText('Vocês empataram, começe um novo jogo!');
             setShowModal(true);
-          }
-          return false;
+        }
+        return false;
     }
+
 
     const checkDraw = () => {
         let result = true;
 
-        for (let i=0; i < gameState.length; i++) {
-            for (let j=0; j < gameState[i].length; j++) {
+        for (let i = 0; i < gameState.length; i++) {
+            for (let j = 0; j < gameState[i].length; j++) {
                 if (gameState[i][j] == '') {
-                    result=false;
+                    result = false;
                     break;
                 }
 
@@ -103,14 +107,14 @@ const BoardGame = () => {
 
     const resetGame = () => {
         setGameState([
-        ['', '', ''],
-        ['', '', ''],
-        ['', '', '']
-    ]);
-    setPlayer('')
-      }
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', '']
+        ]);
+        setPlayer('')
+    }
 
-      
+
 
     return (
         <div className="ticTacToe">
