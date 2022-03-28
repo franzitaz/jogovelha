@@ -1,6 +1,8 @@
+import { Dispatch, SetStateAction } from "react"
+
 interface IModal {
-    show: any
-    dismissModal: any
+    show: boolean
+    dismissModal: Dispatch<SetStateAction<void>>
     modalText: string
     modalTitle:string
 }

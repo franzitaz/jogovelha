@@ -14,6 +14,7 @@ const Row = ({row, handleChange, valueLine}:IRow) => {
             <Square valueLine={valueLine[1]} row={row} col={'1'} handleChange={handleChange}/>
             <Square valueLine={valueLine[2]} row={row} col={'2'} handleChange={handleChange}/>
         </div>
+
 )
     }
 

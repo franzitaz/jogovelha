@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, ChangeEvent } from "react"
 
 interface IModal {
     show: boolean
@@ -11,7 +11,7 @@ const StartGame = ({show, dismissModalStartGame, setPlayerX, setPlayerO}:IModal)
 
     const handleClick = () => dismissModalStartGame();
 
-    const handleChange = (event:any) => {
+    const handleChange = (event:ChangeEvent<HTMLInputElement>) => {
 
         if (event.target.name === 'playerX') {
             setPlayerX(event.target.value);
